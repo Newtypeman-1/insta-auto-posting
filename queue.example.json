@@ -1,0 +1,8 @@
+[
+  {
+    "id": "first-post",
+    "image_url": "https://example.com/your-image.jpg",
+    "caption": "자동으로 올라간 첫 번째 글 #autopost",
+    "scheduled_at": "2026-11-04T20:00:00+09:00"
+  }
+]

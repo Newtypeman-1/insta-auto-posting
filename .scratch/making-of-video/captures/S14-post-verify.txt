@@ -1,0 +1,8 @@
+$ GET /18233985166331147
+{
+  "id": "18233985166331147",
+  "caption": "자동으로 올라간 첫 번째 글 #autopost",
+  "media_type": "IMAGE",
+  "permalink": "https://www.instagram.com/p/Dfn4XoVj9bE/",
+  "timestamp": "2026-11-12T01:31:03+0000"
+}

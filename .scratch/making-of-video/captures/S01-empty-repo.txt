@@ -1,0 +1,6 @@
+$ git log
+fatal: 현재 'main' 브랜치에 아직 아무 커밋도 없습니다
+
+$ ls
+AGENTS.md
+docs

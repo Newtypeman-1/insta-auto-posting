@@ -1,0 +1,47 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+testpaths: tests
+collected 12 items
+
+tests/test_run_due.py .....F                                             [ 50%]
+tests/test_validation.py ......                                          [100%]
+
+=================================== FAILURES ===================================
+_________ test_invalid_post_is_marked_failed_without_calling_instagram _________
+
+tmp_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-12/test_invalid_post_is_marked_fa0')
+
+    def test_invalid_post_is_marked_failed_without_calling_instagram(tmp_path):
+        queue = tmp_path / "queue.json"
+        write_queue(queue, [
+            {"id": "no-tz", "image_url": "https://example.com/cat.jpg",
+             "caption": "시간대 없는 글", "scheduled_at": "2026-11-04T11:00"},
+            {"id": "ok", "image_url": "https://example.com/dog.jpg",
+             "caption": "정상 글", "scheduled_at": "2026-11-04T11:00:00+00:00"},
+        ])
+        publisher = FakePublisher()
+    
+>       run_due(queue, publisher, NOW)
+
+tests/test_run_due.py:141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+queue_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-12/test_invalid_post_is_marked_fa0/queue.json')
+publisher = <test_run_due.FakePublisher object at 0x10b25d350>
+now = datetime.datetime(2026, 11, 4, 12, 0, tzinfo=datetime.timezone.utc)
+
+    def run_due(queue_path, publisher, now):
+        posts = json.loads(queue_path.read_text(encoding="utf-8"))
+        for post in posts:
+            if post.get("status") in ("posted", "failed"):
+                continue
+>           if datetime.fromisoformat(post["scheduled_at"]) <= now:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: can't compare offset-naive and offset-aware datetimes
+
+src/autopost/scheduler.py:12: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_run_due.py::test_invalid_post_is_marked_failed_without_calling_instagram
+========================= 1 failed, 11 passed in 0.04s =========================

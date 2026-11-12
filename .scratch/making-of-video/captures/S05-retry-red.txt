@@ -1,0 +1,36 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+testpaths: tests
+collected 5 items
+
+tests/test_run_due.py ...F.                                              [100%]
+
+=================================== FAILURES ===================================
+_______________ test_failed_post_is_not_retried_on_the_next_run ________________
+
+tmp_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-5/test_failed_post_is_not_retrie0')
+
+    def test_failed_post_is_not_retried_on_the_next_run(tmp_path):
+        queue = tmp_path / "queue.json"
+        write_queue(queue, [
+            {"id": "broken", "image_url": "https://example.com/missing.jpg",
+             "caption": "이미지가 없는 글", "scheduled_at": "2026-11-04T10:00:00+00:00"},
+        ])
+        publisher = RejectingPublisher("https://example.com/missing.jpg", "Media download has failed")
+        run_due(queue, publisher, NOW)
+    
+        publisher.rejected_url = None
+        run_due(queue, publisher, NOW)
+    
+>       assert publisher.published == []
+E       AssertionError: assert [('https://ex... '이미지가 없는 글')] == []
+E         
+E         Left contains one more item: ('https://example.com/missing.jpg', '이미지가 없는 글')
+E         Use -v to get more diff
+
+tests/test_run_due.py:113: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_run_due.py::test_failed_post_is_not_retried_on_the_next_run
+========================= 1 failed, 4 passed in 0.03s ==========================

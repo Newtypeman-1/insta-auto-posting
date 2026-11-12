@@ -1,0 +1,3 @@
+$ uv run autopost queue.json
+first-post: posted (18233985166331147)
+exit 0

@@ -1,0 +1,10 @@
+[
+  {
+    "id": "first-post",
+    "image_url": "https://fastly.picsum.photos/id/0/1080/1080.jpg?hmac=zyNGnIiBB3BWA_njNLTXtyhdvuh7QvI4c1z5lj5U_SA",
+    "caption": "자동으로 올라간 첫 번째 글 #autopost",
+    "scheduled_at": "2026-11-12T00:00:00+09:00",
+    "media_id": "18233985166331147",
+    "status": "posted"
+  }
+]

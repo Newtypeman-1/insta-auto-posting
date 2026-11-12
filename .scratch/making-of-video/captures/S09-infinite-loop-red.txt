@@ -1,0 +1,45 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+collected 3 items
+
+tests/test_graph_api.py ..F                                              [100%]
+
+=================================== FAILURES ===================================
+________________ test_container_error_stops_without_publishing _________________
+
+    def test_container_error_stops_without_publishing():
+        http = FakeHttp({
+            ("POST", f"{BASE}/17841400000000000/media"): [{"id": "container-1"}],
+            ("GET", f"{BASE}/container-1"): [{"status_code": "ERROR"}],
+        })
+    
+        with pytest.raises(PublishError, match="컨테이너 처리 실패: ERROR"):
+>           make_publisher(http).publish("https://example.com/cat.jpg", "첫 자동 포스팅")
+
+tests/test_graph_api.py:76: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/autopost/graph_api.py:23: in publish
+    self._wait_until_ready(container["id"])
+src/autopost/graph_api.py:30: in _wait_until_ready
+    status = self._call("GET", container_id, {"fields": "status_code"})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/autopost/graph_api.py:36: in _call
+    return self.http.request(method, f"{self.base}/{path}",
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_graph_api.FakeHttp object at 0x10ac1ce10>, method = 'GET'
+url = 'https://graph.instagram.com/v23.0/container-1'
+params = {'fields': 'status_code', 'access_token': 'test-token'}
+
+    def request(self, method, url, params):
+        self.calls.append((method, url, params))
+>       return self.responses[(method, url)].pop(0)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       IndexError: pop from empty list
+
+tests/test_graph_api.py:18: IndexError
+=========================== short test summary info ============================
+FAILED tests/test_graph_api.py::test_container_error_stops_without_publishing
+========================= 1 failed, 2 passed in 0.03s ==========================
