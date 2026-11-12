@@ -1,0 +1,4 @@
+$ IG_ACCESS_TOKEN=expired uv run autopost queue.json
+토큰 문제로 중단 (글은 대기 상태로 남음): Invalid OAuth access token - Cannot parse access token (code 190)
+Meta 대시보드에서 토큰을 새로 발급해 .env와 GitHub Secrets에 넣을 것
+exit 3

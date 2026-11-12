@@ -1,6 +1,6 @@
 import time
 
-from autopost.errors import PublishError
+from autopost.errors import AuthError, PublishError
 
 
 class GraphApiPublisher:
@@ -44,5 +44,7 @@ class GraphApiPublisher:
                                  {**params, "access_token": self.access_token})
         if "error" in body:
             error = body["error"]
+            if error.get("code") == 190:
+                raise AuthError(f"{error.get('message')} (code 190)")
             raise PublishError(f"{error.get('message')} (code {error.get('code')})")
         return body

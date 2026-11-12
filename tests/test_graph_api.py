@@ -1,6 +1,6 @@
 import pytest
 
-from autopost.errors import PublishError
+from autopost.errors import AuthError, PublishError
 from autopost.graph_api import GraphApiPublisher
 
 BASE = "https://graph.facebook.com/v27.0"
@@ -103,4 +103,19 @@ def test_api_error_message_is_passed_on():
     })
 
     with pytest.raises(PublishError, match="Invalid OAuth access token"):
+        make_publisher(http).publish("https://example.com/cat.jpg", "첫 자동 포스팅")
+
+
+def test_expired_token_raises_auth_error():
+    http = FakeHttp({
+        ("POST", f"{BASE}/17841400000000000/media"): [{
+            "error": {
+                "message": "Error validating access token: Session has expired",
+                "type": "OAuthException",
+                "code": 190,
+            }
+        }],
+    })
+
+    with pytest.raises(AuthError, match="Session has expired"):
         make_publisher(http).publish("https://example.com/cat.jpg", "첫 자동 포스팅")

@@ -1,6 +1,6 @@
 # 01. 개발하면서 소재 기록하기
 
-Status: ready-for-agent
+Status: resolved
 Type: task
 
 개발 단계마다 `../devlog.md`에 항목을 추가하고 증거를 `../captures/`에 저장한다. 특히 시행착오(실패한 시도, 에러 원문, 방향 전환)는 성공보다 먼저 기록한다. 이 티켓은 기능 개발이 끝날 때까지 열어 둔다.

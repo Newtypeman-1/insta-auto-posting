@@ -4,6 +4,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from autopost.errors import AuthError
 from autopost.graph_api import GraphApiPublisher
 from autopost.http import UrllibHttp
 from autopost.scheduler import run_due
@@ -39,7 +40,12 @@ def main(argv=None):
         version=os.environ.get("IG_API_VERSION") or "v27.0",
     )
     before = {p["id"]: p.get("status") for p in json.loads(queue_path.read_text(encoding="utf-8"))}
-    run_due(queue_path, publisher, datetime.now(timezone.utc))
+    try:
+        run_due(queue_path, publisher, datetime.now(timezone.utc))
+    except AuthError as error:
+        print(f"토큰 문제로 중단 (글은 대기 상태로 남음): {error}", file=sys.stderr)
+        print("Meta 대시보드에서 토큰을 새로 발급해 .env와 GitHub Secrets에 넣을 것", file=sys.stderr)
+        return 3
     for post in json.loads(queue_path.read_text(encoding="utf-8")):
         if post.get("status") != before.get(post["id"]):
             detail = post.get("media_id") or post.get("error")

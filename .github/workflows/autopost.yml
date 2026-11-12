@@ -1,0 +1,48 @@
+name: autopost
+
+# 15분마다 큐를 확인해서 예약 시각이 지난 글을 게시하고, 바뀐 상태를 queue.json에 다시 커밋한다.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+# 두 실행이 겹치면 같은 글을 두 번 올릴 수 있다. 한 번에 하나만 돌고, 나중 실행은 기다린다.
+concurrency:
+  group: autopost
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install
+        run: uv sync --no-dev
+
+      - name: Post due items
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_GRAPH_HOST: graph.facebook.com
+          IG_API_VERSION: v27.0
+        run: uv run autopost queue.json
+
+      - name: Save queue state
+        run: |
+          if git diff --quiet queue.json; then
+            echo "큐 변경 없음"
+            exit 0
+          fi
+          git config user.name "autopost[bot]"
+          git config user.email "autopost[bot]@users.noreply.github.com"
+          git add queue.json
+          git commit -m "autopost: update queue state"
+          git pull --rebase
+          git push

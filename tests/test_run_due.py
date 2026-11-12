@@ -1,7 +1,9 @@
 import json
+
+import pytest
 from datetime import datetime, timezone
 
-from autopost.errors import PublishError
+from autopost.errors import AuthError, PublishError
 from autopost.scheduler import run_due
 
 
@@ -144,3 +146,23 @@ def test_invalid_post_is_marked_failed_without_calling_instagram(tmp_path):
     assert no_tz["status"] == "failed"
     assert no_tz["error"] == "예약 시각에 시간대가 없음 (예: 2026-11-04T20:00:00+09:00)"
     assert publisher.published == [("https://example.com/dog.jpg", "정상 글")]
+
+
+class ExpiredTokenPublisher(FakePublisher):
+    """토큰이 만료돼서 모든 요청이 거절되는 가짜 게시기."""
+
+    def publish(self, image_url, caption):
+        raise AuthError("Error validating access token: Session has expired (code 190)")
+
+
+def test_expired_token_leaves_posts_waiting_and_stops(tmp_path):
+    queue = tmp_path / "queue.json"
+    write_queue(queue, [
+        {"id": "first", "image_url": "https://example.com/cat.jpg",
+         "caption": "첫 글", "scheduled_at": "2026-11-04T10:00:00+00:00"},
+    ])
+
+    with pytest.raises(AuthError):
+        run_due(queue, ExpiredTokenPublisher(), NOW)
+
+    assert "status" not in read_queue(queue)[0]
