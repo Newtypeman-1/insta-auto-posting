@@ -4,7 +4,7 @@
 @font-face { font-family: 'Pretendard'; font-weight: 600; src: url('assets/fonts/Pretendard-SemiBold.woff2') format('woff2'); }
 #root { --ink: #1E1A15; --paper: #FBFAF6; --red: #D2362B; --pink: #E1306C; --green: #2E8B57; position: absolute; inset: 0; overflow: hidden; font-family: 'Pretendard', sans-serif; color: var(--ink); }
 #root * { box-sizing: border-box; }
-.card { position: absolute; left: 300px; top: 190px; width: 480px; padding: 16px 16px 14px; background: var(--paper);
+.card { position: absolute; left: 340px; top: 150px; width: 480px; padding: 16px 16px 14px; background: var(--paper);
   border-radius: 20px; box-shadow: 0 18px 40px rgba(40,20,0,0.30); z-index: 5; }
 .card .photo { position: relative; width: 448px; height: 448px; border-radius: 8px; background: #ECE6DA; overflow: hidden; }
 .card .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -37,7 +37,7 @@
 .door .sign { position: absolute; left: 40px; right: 40px; top: 150px; padding: 12px 0; background: var(--red); color: var(--paper);
   font: 700 40px 'JetBrains Mono', monospace; text-align: center; border-radius: 6px; }
 
-#s05-box { position:absolute; left:340px; top:800px; width:400px; height:260px; z-index:2; }
+#s05-box { position:absolute; left:1100px; top:420px; width:400px; height:260px; z-index:2; }
 #s05-back { position:absolute; left:0; right:0; top:-34px; height:40px; background:#9E7444; border-radius:4px 4px 0 0; }
 #s05-front { position:absolute; inset:0; background:#C79A62; border-radius:4px; box-shadow:0 18px 34px rgba(40,20,0,0.32); z-index:7; }
 #s05-tape { position:absolute; left:170px; width:60px; top:0; height:80px; background:#E8D9B5; opacity:0.9; }
@@ -49,8 +49,8 @@
 #s05-slip .slip { padding: 14px 28px 26px; }
 
   </style>
-  <div id="root" data-composition-id="s05" data-width="1080" data-height="1920">
-<div class="card" id="s05-card" style="z-index:1;"><div class="photo"><img id="s05-card-img" src="assets/img/post-photo.jpg" alt="" /></div><div class="cap" data-layout-ignore>자동으로 올라간 첫 번째 글<br />#autopost</div></div><div id="s05-box"><div id="s05-back"></div><div id="s05-front"><div id="s05-tape"></div></div><div id="s05-lid"></div><div id="s05-label"><span id="s05-prog">IN_PROGRESS</span><span id="s05-err" class="red">ERROR</span></div></div><div class="clock" id="s05-clock" style="left:370px; top:280px; width:340px; height:340px;"><div class="num" style="left:126px; top:15px;">12</div><div class="num" style="left:245px; top:134px;">3</div><div class="num" style="left:126px; top:253px;">6</div><div class="num" style="left:7px; top:134px;">9</div><div class="hand" id="s05-clock-h" style="width:12px; height:81px; margin-left:-6px;"></div><div class="hand" id="s05-clock-m" style="width:8px; height:119px; margin-left:-4px;"></div><div class="pin"></div></div><div class="slipwrap" id="s05-slip" style="left:200px; top:1068px; width:680px;"><div class="slip" style="font-size:30px;"><span class="ln" id="s05-slip-l0">IndexError: pop from empty list</span></div></div>
+  <div id="root" data-composition-id="s05" data-width="1920" data-height="1080">
+<div class="card" id="s05-card" style="z-index:1;"><div class="photo"><img id="s05-card-img" src="assets/img/post-photo.jpg" alt="" /></div><div class="cap" data-layout-ignore>자동으로 올라간 첫 번째 글<br />#autopost</div></div><div id="s05-box"><div id="s05-back"></div><div id="s05-front"><div id="s05-tape"></div></div><div id="s05-lid"></div><div id="s05-label"><span id="s05-prog">IN_PROGRESS</span><span id="s05-err" class="red">ERROR</span></div></div><div class="clock" id="s05-clock" style="left:410px; top:230px; width:340px; height:340px;"><div class="num" style="left:126px; top:15px;">12</div><div class="num" style="left:245px; top:134px;">3</div><div class="num" style="left:126px; top:253px;">6</div><div class="num" style="left:7px; top:134px;">9</div><div class="hand" id="s05-clock-h" style="width:12px; height:81px; margin-left:-6px;"></div><div class="hand" id="s05-clock-m" style="width:8px; height:119px; margin-left:-4px;"></div><div class="pin"></div></div><div class="slipwrap" id="s05-slip" style="left:960px; top:720px; width:680px;"><div class="slip" style="font-size:30px;"><span class="ln" id="s05-slip-l0">IndexError: pop from empty list</span></div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
@@ -58,7 +58,7 @@
     gsap.set("#s05-lid", { opacity: 0 });
     gsap.set("#s05-clock-h", { rotation: 300 });
     tl.fromTo("#s05-box", { y: 1300 }, { y: 0, duration: 0.5, ease: "expo.out" }, 0);
-    tl.to("#s05-card", { y: 455, scale: 0.42, duration: 0.5, ease: "power3.in" }, 0.5);
+    tl.to("#s05-card", { x: 720, y: 115, scale: 0.42, duration: 0.5, ease: "power3.in" }, 0.5);
     tl.fromTo("#s05-lid", { opacity: 0, y: -90, rotation: -14 }, { opacity: 1, y: 0, rotation: 0, duration: 0.15, ease: "power4.in" }, 1.0);
     tl.to("#s05-label", { opacity: 0.25, duration: 0.08, yoyo: true, repeat: 1 }, 1.5);
     tl.to("#s05-label", { opacity: 0.25, duration: 0.08, yoyo: true, repeat: 1 }, 2.17);
@@ -72,7 +72,7 @@
     tl.to("#s05-clock", { y: -1300, duration: 0.4, ease: "power3.in" }, 5.95);
     tl.to("#s05-slip", { opacity: 0, filter: "blur(8px)", duration: 0.15 }, 5.9);
     tl.to("#s05-lid", { y: -70, rotation: 18, opacity: 0, duration: 0.2, ease: "power2.out" }, 6.0);
-    tl.to("#s05-card", { y: 0, scale: 1, duration: 0.5, ease: "expo.out" }, 6.08);
+    tl.to("#s05-card", { x: 0, y: 0, scale: 1, duration: 0.5, ease: "expo.out" }, 6.08);
     tl.to("#s05-box", { y: -1300, duration: 0.4, ease: "power3.in" }, 6.2);
 
     window.__timelines["s05"] = tl;

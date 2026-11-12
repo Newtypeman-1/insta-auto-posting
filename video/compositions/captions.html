@@ -4,7 +4,7 @@
 @font-face { font-family: 'Pretendard'; font-weight: 600; src: url('assets/fonts/Pretendard-SemiBold.woff2') format('woff2'); }
 #root { --ink: #1E1A15; --paper: #FBFAF6; --red: #D2362B; --pink: #E1306C; --green: #2E8B57; position: absolute; inset: 0; overflow: hidden; font-family: 'Pretendard', sans-serif; color: var(--ink); }
 #root * { box-sizing: border-box; }
-.card { position: absolute; left: 300px; top: 190px; width: 480px; padding: 16px 16px 14px; background: var(--paper);
+.card { position: absolute; left: 340px; top: 150px; width: 480px; padding: 16px 16px 14px; background: var(--paper);
   border-radius: 20px; box-shadow: 0 18px 40px rgba(40,20,0,0.30); z-index: 5; }
 .card .photo { position: relative; width: 448px; height: 448px; border-radius: 8px; background: #ECE6DA; overflow: hidden; }
 .card .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -37,13 +37,13 @@
 .door .sign { position: absolute; left: 40px; right: 40px; top: 150px; padding: 12px 0; background: var(--red); color: var(--paper);
   font: 700 40px 'JetBrains Mono', monospace; text-align: center; border-radius: 6px; }
 
-.capline { position:absolute; left:0; right:0; bottom:630px; display:flex; justify-content:center; z-index:50; }
-.capline span { display:block; max-width:960px; padding:16px 36px 18px; background:var(--paper); border-radius:14px;
+.capline { position:absolute; left:0; right:0; bottom:120px; display:flex; justify-content:center; z-index:50; }
+.capline span { display:block; max-width:1400px; padding:16px 36px 18px; background:var(--paper); border-radius:14px;
   font-weight:800; font-size:64px; line-height:1.2; letter-spacing:-0.02em; text-align:center; word-break:keep-all;
   box-shadow:0 10px 22px rgba(40,20,0,0.25); }
 
   </style>
-  <div id="root" data-composition-id="captions" data-width="1080" data-height="1920">
+  <div id="root" data-composition-id="captions" data-width="1920" data-height="1080">
     <div class="capline clip" id="cap01" data-start="0.200" data-duration="1.800"><span id="cap01-t">글 하나 자동으로 올리기</span></div>
     <div class="capline clip" id="cap02" data-start="2.200" data-duration="2.467"><span id="cap02-t">인스타는 글만 올릴 수 없다</span></div>
     <div class="capline clip" id="cap03" data-start="5.000" data-duration="3.667"><span id="cap03-t">코드보다 테스트가 먼저</span></div>

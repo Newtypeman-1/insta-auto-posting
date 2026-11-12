@@ -4,7 +4,7 @@
 @font-face { font-family: 'Pretendard'; font-weight: 600; src: url('assets/fonts/Pretendard-SemiBold.woff2') format('woff2'); }
 #root { --ink: #1E1A15; --paper: #FBFAF6; --red: #D2362B; --pink: #E1306C; --green: #2E8B57; position: absolute; inset: 0; overflow: hidden; font-family: 'Pretendard', sans-serif; color: var(--ink); }
 #root * { box-sizing: border-box; }
-.card { position: absolute; left: 300px; top: 190px; width: 480px; padding: 16px 16px 14px; background: var(--paper);
+.card { position: absolute; left: 340px; top: 150px; width: 480px; padding: 16px 16px 14px; background: var(--paper);
   border-radius: 20px; box-shadow: 0 18px 40px rgba(40,20,0,0.30); z-index: 5; }
 .card .photo { position: relative; width: 448px; height: 448px; border-radius: 8px; background: #ECE6DA; overflow: hidden; }
 .card .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -37,7 +37,7 @@
 .door .sign { position: absolute; left: 40px; right: 40px; top: 150px; padding: 12px 0; background: var(--red); color: var(--paper);
   font: 700 40px 'JetBrains Mono', monospace; text-align: center; border-radius: 6px; }
 
-#s10-phone { position:absolute; left:280px; top:190px; width:520px; height:924px; background:#1E1A15; border-radius:64px; padding:18px; z-index:6;
+#s10-phone { position:absolute; left:700px; top:8px; width:520px; height:924px; background:#1E1A15; border-radius:64px; padding:18px; z-index:6;
   box-shadow:0 26px 50px rgba(40,20,0,0.40); transform-origin:50% 45%; }
 #s10-screen { position:relative; width:100%; height:100%; background:#FFFFFF; border-radius:48px; overflow:hidden; }
 #s10-notch { position:absolute; left:50%; top:14px; width:120px; height:30px; margin-left:-60px; background:#1E1A15; border-radius:15px; z-index:3; }
@@ -46,14 +46,14 @@
 #s10-card2 { left:300px; top:190px; z-index:7; }
 
   </style>
-  <div id="root" data-composition-id="s10" data-width="1080" data-height="1920">
-<div id="s10-phone"><div id="s10-screen"><div id="s10-notch"></div><img id="s10-shot" src="assets/img/post-screen.png" alt="" /></div></div><div class="clock" id="s10-clock" style="left:640px; top:380px; width:330px; height:330px;"><div class="num" style="left:121px; top:14px;">12</div><div class="num" style="left:236px; top:129px;">3</div><div class="num" style="left:121px; top:244px;">6</div><div class="num" style="left:6px; top:129px;">9</div><div class="hand" id="s10-clock-h" style="width:12px; height:79px; margin-left:-6px;"></div><div class="hand" id="s10-clock-m" style="width:8px; height:115px; margin-left:-4px;"></div><div class="pin"></div></div><div class="slipwrap" id="s10-slip" style="left:600px; top:770px; width:420px;"><div class="slip" style="font-size:44px;"><span class="ln" id="s10-slip-l0">*/15 * * * *</span></div></div>
+  <div id="root" data-composition-id="s10" data-width="1920" data-height="1080">
+<div id="s10-phone"><div id="s10-screen"><div id="s10-notch"></div><img id="s10-shot" src="assets/img/post-screen.png" alt="" /></div></div><div class="clock" id="s10-clock" style="left:1150px; top:160px; width:330px; height:330px;"><div class="num" style="left:121px; top:14px;">12</div><div class="num" style="left:236px; top:129px;">3</div><div class="num" style="left:121px; top:244px;">6</div><div class="num" style="left:6px; top:129px;">9</div><div class="hand" id="s10-clock-h" style="width:12px; height:79px; margin-left:-6px;"></div><div class="hand" id="s10-clock-m" style="width:8px; height:115px; margin-left:-4px;"></div><div class="pin"></div></div><div class="slipwrap" id="s10-slip" style="left:1110px; top:530px; width:420px;"><div class="slip" style="font-size:44px;"><span class="ln" id="s10-slip-l0">*/15 * * * *</span></div></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-    gsap.set("#s10-phone", { scale: 1.12 });
+    gsap.set("#s10-phone", { scale: 0.8 });
     gsap.set(["#s10-clock-h", "#s10-clock-m"], { rotation: 0 });
-    tl.to("#s10-phone", { scale: 0.66, x: -235, duration: 0.6, ease: "power2.inOut" }, 0.2);
+    tl.to("#s10-phone", { scale: 0.55, x: -380, duration: 0.6, ease: "power2.inOut" }, 0.2);
     tl.fromTo("#s10-clock", { y: 1300 }, { y: 0, duration: 0.5, ease: "expo.out" }, 0.6);
     tl.fromTo("#s10-slip", { y: 1300 }, { y: 0, duration: 0.5, ease: "expo.out" }, 0.9);
     tl.to("#s10-clock-m", { rotation: 90, duration: 0.5, ease: "power2.inOut" }, 1.4);
