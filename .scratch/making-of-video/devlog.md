@@ -153,11 +153,11 @@
 - 증거: captures/S14-first-real-post.txt, captures/S14-post-verify.txt (인스타 앱 화면 스크린샷 받을 예정)
 - 영상 가치: ★★★
 
-### S15. 토큰이 새어 나가지 않게
-- 목표: API 토큰이 GitHub에 올라가는 사고를 막는다
-- 시도: gitleaks 설치. 지금까지의 히스토리 검사 → 커밋 전에 검사하는 pre-commit 훅을 `.githooks/`에 만들어 저장소에 함께 커밋. 그리고 일부러 사고를 재현: 캡처 파일에 (가짜) 토큰을 붙여넣고 커밋 시도
-- 결과: 히스토리 `no leaks found`. 폴더 전체 검사는 `.env`에서 1건(정상, git이 무시하는 파일). 가짜 토큰 커밋은 `leaks found: 1`, `exit 1`로 막혔고 토큰은 출력에서도 `REDACTED`
-- 고찰: 제일 위험한 곳은 코드가 아니라 영상 소재로 모으는 캡처 파일이었다. 터미널 출력을 그대로 저장하다 보면 토큰이 섞인다. 기능이 끝난 뒤에 하는 일이 오히려 사고를 막는다
-  > 자막: 가장 위험한 파일은 캡처였다
-- 증거: captures/S15-history-scan.txt, captures/S15-hook-blocked.txt
-- 영상 가치: ★★★
+### S15. 토큰 유출 방지
+- 목표: 토큰이 GitHub에 올라가지 않게
+- 시도: gitleaks로 커밋 전 검사 훅을 걸었다
+- 결과: 토큰이 섞인 커밋은 막힌다
+- 고찰: 짧게 언급만 한다
+  > 자막: 토큰은 커밋 전에 막는다
+- 증거: captures/S15-hook-blocked.txt
+- 영상 가치: ★
