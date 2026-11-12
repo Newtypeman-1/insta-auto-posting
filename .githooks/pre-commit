@@ -1,0 +1,8 @@
+#!/bin/sh
+# 커밋하기 전에 스테이징된 변경에서 API 키·토큰을 찾는다. 찾으면 커밋을 막는다.
+# 설치: git config core.hooksPath .githooks  (gitleaks는 brew install gitleaks)
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: gitleaks가 없음 → brew install gitleaks" >&2
+  exit 1
+fi
+exec gitleaks git --pre-commit --staged --redact --no-banner -v

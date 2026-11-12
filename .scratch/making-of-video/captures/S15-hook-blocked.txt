@@ -1,0 +1,13 @@
+$ git commit -m "add capture"
+Finding:     IG_ACCESS_TOKEN=REDACTED
+Secret:      REDACTED
+RuleID:      generic-api-key
+Entropy:     5.752362
+File:        .scratch/making-of-video/captures/oops-token.txt
+Line:        2
+Fingerprint: .scratch/making-of-video/captures/oops-token.txt:generic-api-key:2
+
+10:39AM INF 0 commits scanned.
+10:39AM INF scanned ~213 bytes (213 bytes) in 36.3ms
+10:39AM WRN leaks found: 1
+exit 1
