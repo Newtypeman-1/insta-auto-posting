@@ -1,0 +1,8 @@
+.hyperframes/artifacts/
+node_modules/
+renders/
+*.mp4
+.thumbnails/
+.waveform-cache/
+.hyperframes/cache/
+.hyperframes/preview/

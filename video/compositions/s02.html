@@ -1,0 +1,59 @@
+<template>
+  <style>
+@font-face { font-family: 'Pretendard'; font-weight: 800; src: url('assets/fonts/Pretendard-ExtraBold.woff2') format('woff2'); }
+@font-face { font-family: 'Pretendard'; font-weight: 600; src: url('assets/fonts/Pretendard-SemiBold.woff2') format('woff2'); }
+#root { --ink: #1E1A15; --paper: #FBFAF6; --red: #D2362B; --pink: #E1306C; --green: #2E8B57; position: absolute; inset: 0; overflow: hidden; font-family: 'Pretendard', sans-serif; color: var(--ink); }
+#root * { box-sizing: border-box; }
+.card { position: absolute; left: 300px; top: 190px; width: 480px; padding: 16px 16px 14px; background: var(--paper);
+  border-radius: 20px; box-shadow: 0 18px 40px rgba(40,20,0,0.30); z-index: 5; }
+.card .photo { position: relative; width: 448px; height: 448px; border-radius: 8px; background: #ECE6DA; overflow: hidden; }
+.card .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.card .slot { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font: 500 32px 'JetBrains Mono', monospace; color: #6F6555; }
+.card .cap { margin-top: 12px; font-weight: 600; font-size: 28px; line-height: 36px; letter-spacing: -0.01em; }
+.slipwrap { position: absolute; filter: drop-shadow(0 12px 16px rgba(40,20,0,0.28)); z-index: 3; }
+.slip { background: var(--paper); padding: 24px 32px 36px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), 100.000% calc(100% - 12px), 97.500% 100%, 95.000% calc(100% - 12px), 92.500% 100%, 90.000% calc(100% - 12px), 87.500% 100%, 85.000% calc(100% - 12px), 82.500% 100%, 80.000% calc(100% - 12px), 77.500% 100%, 75.000% calc(100% - 12px), 72.500% 100%, 70.000% calc(100% - 12px), 67.500% 100%, 65.000% calc(100% - 12px), 62.500% 100%, 60.000% calc(100% - 12px), 57.500% 100%, 55.000% calc(100% - 12px), 52.500% 100%, 50.000% calc(100% - 12px), 47.500% 100%, 45.000% calc(100% - 12px), 42.500% 100%, 40.000% calc(100% - 12px), 37.500% 100%, 35.000% calc(100% - 12px), 32.500% 100%, 30.000% calc(100% - 12px), 27.500% 100%, 25.000% calc(100% - 12px), 22.500% 100%, 20.000% calc(100% - 12px), 17.500% 100%, 15.000% calc(100% - 12px), 12.500% 100%, 10.000% calc(100% - 12px), 7.500% 100%, 5.000% calc(100% - 12px), 2.500% 100%, 0.000% calc(100% - 12px));
+  font: 500 34px/1.4 'JetBrains Mono', 'Pretendard', monospace; color: var(--ink); white-space: pre; }
+.slip .ln { display: block; }
+.dim { color: #8A8172; }
+.red { color: var(--red); }
+.green { color: var(--green); }
+.pink { color: var(--pink); }
+.stamp { position: absolute; border: 6px solid var(--red); color: var(--red); border-radius: 8px; padding: 8px 22px;
+  font: 700 44px 'JetBrains Mono', monospace; white-space: nowrap; z-index: 8; background: rgba(251,250,246,0.82); }
+.clock { position: absolute; border-radius: 50%; background: #FBFAF6; border: 14px solid #2A241D;
+  box-shadow: 0 16px 34px rgba(40,20,0,0.32); z-index: 4; }
+.clock .num { position: absolute; font: 600 34px 'Pretendard'; width: 60px; text-align: center; }
+.clock .hand { position: absolute; left: 50%; bottom: 50%; background: #1E1A15; border-radius: 6px; transform-origin: 50% 100%; }
+.clock .pin { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #1E1A15; }
+.door { position: absolute; width: 300px; height: 400px; z-index: 4; }
+.door .frame { position: absolute; inset: -18px -18px 0 -18px; background: #5A3A1E; border-radius: 10px 10px 0 0;
+  box-shadow: 0 16px 30px rgba(40,20,0,0.35); }
+.door .inside { position: absolute; inset: 0; background: #2E1C0E; }
+.door .slab { position: absolute; inset: 0; background: #7A4E28; transform-origin: 0% 50%; z-index: 6; }
+.door .slab .pnl { position: absolute; left: 34px; right: 34px; border: 6px solid #6A4220; border-radius: 6px; }
+.door .slab .knob { position: absolute; right: 30px; top: 205px; width: 34px; height: 34px; border-radius: 50%; background: #C9A227;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.25); }
+.door .sign { position: absolute; left: 40px; right: 40px; top: 150px; padding: 12px 0; background: var(--red); color: var(--paper);
+  font: 700 40px 'JetBrains Mono', monospace; text-align: center; border-radius: 6px; }
+
+  </style>
+  <div id="root" data-composition-id="s02" data-width="1080" data-height="1920">
+<div class="card" id="s02-card"><div class="photo"><img id="s02-card-img" src="assets/img/post-photo.jpg" alt="" style="clip-path: inset(0 0 100% 0)" /><div class="slot" id="s02-card-slot">image_url</div></div><div class="cap" data-layout-ignore>자동으로 올라간 첫 번째 글<br />#autopost</div></div><div class="slipwrap" id="s02-slip" style="left:90px; top:800px; width:900px;"><div class="slip" style="font-size:34px;"><span class="ln" id="s02-slip-l0"><span class="dim">$ uv run pytest</span></span><span class="ln" id="s02-slip-l1"><span class="red">E ModuleNotFoundError:</span></span><span class="ln" id="s02-slip-l2"><span class="red">  No module named</span></span><span class="ln" id="s02-slip-l3"><span class="red">  'autopost.scheduler'</span></span></div></div><div id="s02-pass" style="position:absolute; left:122px; top:880px; z-index:4; font:700 64px 'JetBrains Mono', monospace; color:var(--green);">1 passed</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#s02-slip", { y: 1300 }, { y: 0, duration: 0.5, ease: "expo.out" }, 0);
+    tl.fromTo("#s02-slip-l0", { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "none" }, 0.350);
+    tl.fromTo("#s02-slip-l1", { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "none" }, 0.450);
+    tl.fromTo("#s02-slip-l2", { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "none" }, 0.550);
+    tl.fromTo("#s02-slip-l3", { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "none" }, 0.650);
+    tl.to(["#s02-slip-l1", "#s02-slip-l2", "#s02-slip-l3"], { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 2.05);
+    tl.fromTo("#s02-pass", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.out" }, 2.2);
+    tl.to("#s02-card-slot", { opacity: 0, duration: 0.1 }, 3.2);
+    tl.fromTo("#s02-card-img", { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "steps(9)" }, 3.2);
+    tl.to(["#s02-slip", "#s02-pass"], { y: -1300, duration: 0.4, ease: "power3.in" }, 3.5);
+
+    window.__timelines["s02"] = tl;
+  </script>
+</template>

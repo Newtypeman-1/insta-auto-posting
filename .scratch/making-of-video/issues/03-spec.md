@@ -1,6 +1,6 @@
 # 03. 고른 스토리라인을 SPEC.md로 쓰기
 
-Status: needs-info
+Status: resolved
 Type: task
 Blocked by: 02
 

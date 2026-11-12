@@ -1,0 +1,60 @@
+<template>
+  <style>
+@font-face { font-family: 'Pretendard'; font-weight: 800; src: url('assets/fonts/Pretendard-ExtraBold.woff2') format('woff2'); }
+@font-face { font-family: 'Pretendard'; font-weight: 600; src: url('assets/fonts/Pretendard-SemiBold.woff2') format('woff2'); }
+#root { --ink: #1E1A15; --paper: #FBFAF6; --red: #D2362B; --pink: #E1306C; --green: #2E8B57; position: absolute; inset: 0; overflow: hidden; font-family: 'Pretendard', sans-serif; color: var(--ink); }
+#root * { box-sizing: border-box; }
+.card { position: absolute; left: 300px; top: 190px; width: 480px; padding: 16px 16px 14px; background: var(--paper);
+  border-radius: 20px; box-shadow: 0 18px 40px rgba(40,20,0,0.30); z-index: 5; }
+.card .photo { position: relative; width: 448px; height: 448px; border-radius: 8px; background: #ECE6DA; overflow: hidden; }
+.card .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.card .slot { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font: 500 32px 'JetBrains Mono', monospace; color: #6F6555; }
+.card .cap { margin-top: 12px; font-weight: 600; font-size: 28px; line-height: 36px; letter-spacing: -0.01em; }
+.slipwrap { position: absolute; filter: drop-shadow(0 12px 16px rgba(40,20,0,0.28)); z-index: 3; }
+.slip { background: var(--paper); padding: 24px 32px 36px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), 100.000% calc(100% - 12px), 97.500% 100%, 95.000% calc(100% - 12px), 92.500% 100%, 90.000% calc(100% - 12px), 87.500% 100%, 85.000% calc(100% - 12px), 82.500% 100%, 80.000% calc(100% - 12px), 77.500% 100%, 75.000% calc(100% - 12px), 72.500% 100%, 70.000% calc(100% - 12px), 67.500% 100%, 65.000% calc(100% - 12px), 62.500% 100%, 60.000% calc(100% - 12px), 57.500% 100%, 55.000% calc(100% - 12px), 52.500% 100%, 50.000% calc(100% - 12px), 47.500% 100%, 45.000% calc(100% - 12px), 42.500% 100%, 40.000% calc(100% - 12px), 37.500% 100%, 35.000% calc(100% - 12px), 32.500% 100%, 30.000% calc(100% - 12px), 27.500% 100%, 25.000% calc(100% - 12px), 22.500% 100%, 20.000% calc(100% - 12px), 17.500% 100%, 15.000% calc(100% - 12px), 12.500% 100%, 10.000% calc(100% - 12px), 7.500% 100%, 5.000% calc(100% - 12px), 2.500% 100%, 0.000% calc(100% - 12px));
+  font: 500 34px/1.4 'JetBrains Mono', 'Pretendard', monospace; color: var(--ink); white-space: pre; }
+.slip .ln { display: block; }
+.dim { color: #8A8172; }
+.red { color: var(--red); }
+.green { color: var(--green); }
+.pink { color: var(--pink); }
+.stamp { position: absolute; border: 6px solid var(--red); color: var(--red); border-radius: 8px; padding: 8px 22px;
+  font: 700 44px 'JetBrains Mono', monospace; white-space: nowrap; z-index: 8; background: rgba(251,250,246,0.82); }
+.clock { position: absolute; border-radius: 50%; background: #FBFAF6; border: 14px solid #2A241D;
+  box-shadow: 0 16px 34px rgba(40,20,0,0.32); z-index: 4; }
+.clock .num { position: absolute; font: 600 34px 'Pretendard'; width: 60px; text-align: center; }
+.clock .hand { position: absolute; left: 50%; bottom: 50%; background: #1E1A15; border-radius: 6px; transform-origin: 50% 100%; }
+.clock .pin { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #1E1A15; }
+.door { position: absolute; width: 300px; height: 400px; z-index: 4; }
+.door .frame { position: absolute; inset: -18px -18px 0 -18px; background: #5A3A1E; border-radius: 10px 10px 0 0;
+  box-shadow: 0 16px 30px rgba(40,20,0,0.35); }
+.door .inside { position: absolute; inset: 0; background: #2E1C0E; }
+.door .slab { position: absolute; inset: 0; background: #7A4E28; transform-origin: 0% 50%; z-index: 6; }
+.door .slab .pnl { position: absolute; left: 34px; right: 34px; border: 6px solid #6A4220; border-radius: 6px; }
+.door .slab .knob { position: absolute; right: 30px; top: 205px; width: 34px; height: 34px; border-radius: 50%; background: #C9A227;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.25); }
+.door .sign { position: absolute; left: 40px; right: 40px; top: 150px; padding: 12px 0; background: var(--red); color: var(--paper);
+  font: 700 40px 'JetBrains Mono', monospace; text-align: center; border-radius: 6px; }
+
+  </style>
+  <div id="root" data-composition-id="s04" data-width="1080" data-height="1920">
+<div class="card" id="s04-g1" data-layout-ignore style="z-index:3; left:330px; top:168px;"><div class="photo"><img id="s04-g1-img" src="assets/img/post-photo.jpg" alt="" /></div><div class="cap" data-layout-ignore>자동으로 올라간 첫 번째 글<br />#autopost</div></div><div class="card" id="s04-g2" data-layout-ignore style="z-index:2; left:360px; top:146px;"><div class="photo"><img id="s04-g2-img" src="assets/img/post-photo.jpg" alt="" /></div><div class="cap" data-layout-ignore>자동으로 올라간 첫 번째 글<br />#autopost</div></div><div class="card" id="s04-g3" data-layout-ignore style="z-index:1; left:390px; top:124px;"><div class="photo"><img id="s04-g3-img" src="assets/img/post-photo.jpg" alt="" /></div><div class="cap" data-layout-ignore>자동으로 올라간 첫 번째 글<br />#autopost</div></div><div class="card" id="s04-card"><div class="photo"><img id="s04-card-img" src="assets/img/post-photo.jpg" alt="" /></div><div class="cap" data-layout-ignore>자동으로 올라간 첫 번째 글<br />#autopost</div></div><div class="clock" id="s04-clock" style="left:90px; top:800px; width:340px; height:340px;"><div class="num" style="left:126px; top:15px;">12</div><div class="num" style="left:245px; top:134px;">3</div><div class="num" style="left:126px; top:253px;">6</div><div class="num" style="left:7px; top:134px;">9</div><div style="position:absolute; left:180px; top:64px; width:108px; text-align:center; font:700 34px 'JetBrains Mono', monospace;">20:00</div><div style="position:absolute; left:180px; top:106px; width:108px; text-align:center; font:500 28px 'JetBrains Mono', monospace; color:#6F6555;">+??:??</div><div class="hand" id="s04-clock-h" style="width:12px; height:81px; margin-left:-6px;"></div><div class="hand" id="s04-clock-m" style="width:8px; height:119px; margin-left:-4px;"></div><div class="pin"></div></div><div class="slipwrap" id="s04-slip" style="left:470px; top:812px; width:540px;"><div class="slip" style="font-size:32px;"><span class="ln" id="s04-slip-l0"><span class="red">TypeError:</span></span><span class="ln" id="s04-slip-l1"><span class="red">can't compare</span></span><span class="ln" id="s04-slip-l2"><span class="red">offset-naive and</span></span><span class="ln" id="s04-slip-l3"><span class="red">offset-aware datetimes</span></span></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    gsap.set("#s04-clock-h", { rotation: 240 });
+    gsap.set("#s04-clock-m", { rotation: 0 });
+    tl.fromTo("#s04-clock", { y: 1300 }, { y: 0, duration: 0.5, ease: "expo.out" }, 0);
+    tl.fromTo(["#s04-g1", "#s04-g2", "#s04-g3"], { x: 760 }, { x: 0, duration: 0.55, ease: "power3.in", stagger: 0.04 }, 0.15);
+    tl.fromTo(["#s04-card", "#s04-g1", "#s04-g2", "#s04-g3"], { x: 0 }, { x: 10, duration: 0.033, yoyo: true, repeat: 3, ease: "none" }, 0.8);
+    tl.fromTo("#s04-slip", { y: 1300 }, { y: 0, duration: 0.5, ease: "expo.out" }, 1.0);
+    tl.fromTo("#s04-slip-l0", { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "none" }, 1.100);
+    tl.fromTo("#s04-slip-l1", { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "none" }, 1.200);
+    tl.fromTo("#s04-slip-l2", { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "none" }, 1.300);
+    tl.fromTo("#s04-slip-l3", { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "none" }, 1.400);
+    tl.to(["#s04-clock", "#s04-slip", "#s04-g3", "#s04-g2", "#s04-g1"], { y: -1300, duration: 0.4, ease: "power3.in", stagger: 0.03 }, 4.15);
+
+    window.__timelines["s04"] = tl;
+  </script>
+</template>
