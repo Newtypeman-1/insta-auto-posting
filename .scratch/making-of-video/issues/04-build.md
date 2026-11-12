@@ -1,6 +1,6 @@
 # 04. HyperFrames로 영상 제작
 
-Status: needs-info
+Status: ready-for-human
 Type: task
 Blocked by: 03
 
@@ -11,3 +11,5 @@ Blocked by: 03
 ## Comments
 
 첫 빌드 완료: check 통과, REVIEW.md 작성, 미리보기 열림. 음악 없음(소스 미정). 사용자 확인 대기.
+
+- 16:9로 다시 배치했다. 배경음악은 넣지 않기로 함(사용자). 저화질(draft) 렌더로 확인 중이며, 사용자가 보고 승인하면 05로 넘어간다.
