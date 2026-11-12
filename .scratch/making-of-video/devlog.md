@@ -168,5 +168,5 @@
 - 결과: 만료일을 쫓는 대신 만료돼도 버티게 바꿨다. 예전 코드는 토큰이 죽으면 모든 글을 조용히 "실패"로 처리했을 것이다. TDD로 `code 190`이면 글은 대기 상태로 두고 실행 자체를 실패시켜 GitHub이 메일로 알려 주게 함. 테스트 19개 통과
 - 고찰: 자동화의 진짜 적은 시끄러운 에러가 아니라 조용한 실패다
   > 자막: 조용히 실패하지 않게
-- 증거: captures/S16-auth-error-red.txt, captures/S16-auth-error-cli.txt
+- 증거: captures/S16-auth-error-red.txt, captures/S16-auth-error-cli.txt, captures/S16-actions-first-run.txt (GitHub에서 첫 실행 성공, 예약된 글이 없어 "큐 변경 없음")
 - 영상 가치: ★★

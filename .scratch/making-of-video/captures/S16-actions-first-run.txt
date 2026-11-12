@@ -1,0 +1,6 @@
+$ gh workflow run autopost.yml
+https://github.com/Newtypeman-1/insta-auto-posting/actions/runs/43140253614
+$ gh run watch --exit-status
+exit 0
+...
+큐 변경 없음
