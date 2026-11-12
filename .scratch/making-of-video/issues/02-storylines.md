@@ -1,6 +1,6 @@
 # 02. 스토리라인 3개 쓰고 하나 고르기
 
-Status: needs-info
+Status: resolved
 Type: task
 Blocked by: 01
 
@@ -11,3 +11,5 @@ devlog에서 영상 가치가 ★2 이상인 단계를 골라, 서로 다른 영
 ## Comments
 
 STORYLINES.md 작성 완료 (B 추천, A 과감, C 레퍼런스). 사용자 선택 대기.
+
+사용자 선택: "일단 B" (잠정, 바뀔 수 있음).
