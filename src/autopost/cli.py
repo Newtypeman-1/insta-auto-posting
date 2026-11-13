@@ -1,12 +1,14 @@
+import argparse
 import json
 import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from autopost.errors import AuthError
+from autopost.adding import add_post
+from autopost.errors import AddError, AuthError
 from autopost.graph_api import GraphApiPublisher
-from autopost.http import UrllibHttp
+from autopost.http import UrllibHttp, fetch_head
 from autopost.scheduler import run_due
 
 REQUIRED = ("IG_USER_ID", "IG_ACCESS_TOKEN")
@@ -23,8 +25,28 @@ def load_env(path=Path(".env")):
                 os.environ.setdefault(key.strip(), value.strip())
 
 
-def main(argv=None):
+def add_command(argv, fetch):
+    parser = argparse.ArgumentParser(prog="autopost add", description="공개 URL의 JPEG 사진으로 글 하나를 큐에 추가한다")
+    parser.add_argument("image_url", help="인스타그램이 가져갈 수 있는 공개 JPEG 주소")
+    parser.add_argument("--caption", required=True)
+    parser.add_argument("--at", required=True, help="예약 시각, 시간대 포함 (예: 2026-11-14T20:00:00+09:00)")
+    parser.add_argument("--id", dest="post_id", help="글 id (생략하면 post-N)")
+    parser.add_argument("--queue", default="queue.json")
+    args = parser.parse_args(argv)
+    try:
+        post = add_post(Path(args.queue), args.image_url, args.caption, args.at, fetch=fetch, post_id=args.post_id)
+    except AddError as error:
+        print(f"큐에 넣지 않음: {error}", file=sys.stderr)
+        return 1
+    print(f"{post['id']}: 큐에 추가됨 ({post['scheduled_at']})")
+    print(f"다음: git add {args.queue} && git commit -m \"queue: {post['id']}\" && git push")
+    return 0
+
+
+def main(argv=None, fetch=fetch_head):
     argv = sys.argv[1:] if argv is None else argv
+    if argv and argv[0] == "add":
+        return add_command(argv[1:], fetch)
     queue_path = Path(argv[0] if argv else "queue.json")
     load_env()
     missing = [name for name in REQUIRED if not os.environ.get(name)]

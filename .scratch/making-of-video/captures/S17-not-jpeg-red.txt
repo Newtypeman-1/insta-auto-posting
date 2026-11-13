@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+collected 2 items
+
+tests/test_add_post.py .F                                                [100%]
+
+=================================== FAILURES ===================================
+_______________ test_png_is_refused_and_the_queue_is_left_alone ________________
+
+tmp_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-27/test_png_is_refused_and_the_qu0')
+
+    def test_png_is_refused_and_the_queue_is_left_alone(tmp_path):
+        queue = tmp_path / "queue.json"
+        write_queue(queue, [FIRST])
+    
+>       with pytest.raises(AddError, match="JPEG가 아님"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE AddError
+
+tests/test_add_post.py:56: Failed
+=========================== short test summary info ============================
+FAILED tests/test_add_post.py::test_png_is_refused_and_the_queue_is_left_alone
+========================= 1 failed, 1 passed in 0.03s ==========================

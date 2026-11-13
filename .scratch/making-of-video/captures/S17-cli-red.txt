@@ -1,0 +1,43 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+collected 3 items
+
+tests/test_cli.py FF.                                                    [100%]
+
+=================================== FAILURES ===================================
+_________________ test_add_command_puts_the_post_in_the_queue __________________
+
+empty_dir = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-36/test_add_command_puts_the_post0')
+capsys = <_pytest.capture.CaptureFixture object at 0x10b0adfd0>
+
+    def test_add_command_puts_the_post_in_the_queue(empty_dir, capsys):
+        queue = empty_dir / "queue.json"
+        queue.write_text("[]", encoding="utf-8")
+    
+>       code = main(["add", "https://example.com/photo.jpg", "--caption", "두 번째 글 #autopost",
+                     "--at", "2026-11-14T20:00:00+09:00", "--queue", str(queue)],
+                    fetch=lambda url: JPEG_START)
+E       TypeError: main() got an unexpected keyword argument 'fetch'
+
+/Users/newtypeman/claudeProjects/insta/tests/test_cli.py:23: TypeError
+_____________________ test_add_command_explains_a_refusal ______________________
+
+empty_dir = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-36/test_add_command_explains_a_re0')
+capsys = <_pytest.capture.CaptureFixture object at 0x10b15ead0>
+
+    def test_add_command_explains_a_refusal(empty_dir, capsys):
+        queue = empty_dir / "queue.json"
+        queue.write_text("[]", encoding="utf-8")
+    
+>       code = main(["add", "https://example.com/photo.png", "--caption", "글",
+                     "--at", "2026-11-14T20:00:00+09:00", "--queue", str(queue)],
+                    fetch=lambda url: b"\x89PNG\r\n\x1a\n")
+E       TypeError: main() got an unexpected keyword argument 'fetch'
+
+/Users/newtypeman/claudeProjects/insta/tests/test_cli.py:36: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_add_command_puts_the_post_in_the_queue - TypeE...
+FAILED tests/test_cli.py::test_add_command_explains_a_refusal - TypeError: ma...
+========================= 2 failed, 1 passed in 0.05s ==========================

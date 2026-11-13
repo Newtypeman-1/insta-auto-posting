@@ -1,0 +1,46 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+collected 7 items
+
+tests/test_add_post.py .....FF                                           [100%]
+
+=================================== FAILURES ===================================
+_______________ test_automatic_id_skips_ids_already_in_the_queue _______________
+
+tmp_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-34/test_automatic_id_skips_ids_al0')
+
+    def test_automatic_id_skips_ids_already_in_the_queue(tmp_path):
+        queue = tmp_path / "queue.json"
+        write_queue(queue, [{**FIRST, "id": "post-2"}])
+    
+        post = add_post(queue, "https://example.com/next.jpg", "다음 글",
+                        "2026-11-14T20:00:00+09:00", fetch=fake_fetch(JPEG_START))
+    
+>       assert post["id"] == "post-3"
+E       AssertionError: assert 'post-2' == 'post-3'
+E         
+E         - post-3
+E         ?      ^
+E         + post-2
+E         ?      ^
+
+tests/test_add_post.py:107: AssertionError
+______________ test_chosen_id_is_used_and_a_duplicate_is_refused _______________
+
+tmp_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-34/test_chosen_id_is_used_and_a_d0')
+
+    def test_chosen_id_is_used_and_a_duplicate_is_refused(tmp_path):
+        queue = tmp_path / "queue.json"
+        write_queue(queue, [FIRST])
+    
+>       post = add_post(queue, "https://example.com/a.jpg", "글", "2026-11-14T20:00:00+09:00",
+                        fetch=fake_fetch(JPEG_START), post_id="launch-day")
+E       TypeError: add_post() got an unexpected keyword argument 'post_id'
+
+tests/test_add_post.py:115: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_add_post.py::test_automatic_id_skips_ids_already_in_the_queue
+FAILED tests/test_add_post.py::test_chosen_id_is_used_and_a_duplicate_is_refused
+========================= 2 failed, 5 passed in 0.12s ==========================

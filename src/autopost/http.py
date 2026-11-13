@@ -18,3 +18,10 @@ class UrllibHttp:
                 return json.loads(response.read())
         except urllib.error.HTTPError as error:
             return json.loads(error.read())
+
+
+def fetch_head(url, size=16):
+    """URL의 앞 몇 바이트만 받아 온다 (사진 형식 확인용). 못 받으면 OSError."""
+    req = urllib.request.Request(url, headers={"Range": f"bytes=0-{size - 1}", "User-Agent": "autopost"})
+    with urllib.request.urlopen(req, timeout=30) as response:
+        return response.read(size)

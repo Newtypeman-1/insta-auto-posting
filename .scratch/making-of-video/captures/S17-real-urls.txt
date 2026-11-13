@@ -1,0 +1,13 @@
+$ uv run autopost add https://fastly.picsum.photos/id/0/1080/1080.jpg?... --caption "두 번째 글 #autopost" --at 2026-11-14T20:00:00+09:00
+post-1: 큐에 추가됨 (2026-11-14T20:00:00+09:00)
+다음: git add queue.json && git commit -m "queue: post-1" && git push
+exit 0
+$ uv run autopost add https://www.python.org/static/img/python-logo.png --caption "PNG" --at 2026-11-14T20:00:00+09:00
+큐에 넣지 않음: JPEG가 아님 (PNG로 보임)
+exit 1
+$ uv run autopost add https://raw.githubusercontent.com/Newtypeman-1/insta-auto-posting/main/images/none.jpg --caption "없는 사진" --at 2026-11-14T20:00:00+09:00
+큐에 넣지 않음: 사진을 받을 수 없음 (HTTP Error 404: Not Found). 인스타그램이 가져갈 수 있게 누구나 열 수 있는 공개 주소여야 함
+exit 1
+$ uv run autopost add https://example.com/a.jpg --caption "시간대 없음" --at 2026-11-14T20:00
+큐에 넣지 않음: 예약 시각에 시간대가 없음 (예: 2026-11-04T20:00:00+09:00)
+exit 1

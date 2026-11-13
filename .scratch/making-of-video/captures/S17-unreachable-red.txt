@@ -1,0 +1,38 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+collected 5 items
+
+tests/test_add_post.py ....F                                             [100%]
+
+=================================== FAILURES ===================================
+____________ test_url_that_cannot_be_opened_is_refused_with_a_hint _____________
+
+tmp_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-31/test_url_that_cannot_be_opened0')
+
+    def test_url_that_cannot_be_opened_is_refused_with_a_hint(tmp_path):
+        queue = tmp_path / "queue.json"
+        write_queue(queue, [FIRST])
+    
+        with pytest.raises(AddError, match="사진을 받을 수 없음.*404.*공개"):
+>           add_post(queue, "https://raw.githubusercontent.com/me/private/main/a.jpg", "비공개 저장소의 사진",
+                     "2026-11-14T20:00:00+09:00", fetch=unreachable)
+
+tests/test_add_post.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/autopost/adding.py:32: in add_post
+    problem = image_problem(fetch(image_url))
+                            ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+url = 'https://raw.githubusercontent.com/me/private/main/a.jpg'
+
+    def unreachable(url):
+>       raise OSError("HTTP Error 404: Not Found")
+E       OSError: HTTP Error 404: Not Found
+
+tests/test_add_post.py:86: OSError
+=========================== short test summary info ============================
+FAILED tests/test_add_post.py::test_url_that_cannot_be_opened_is_refused_with_a_hint
+========================= 1 failed, 4 passed in 0.04s ==========================

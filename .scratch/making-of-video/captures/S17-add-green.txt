@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+testpaths: tests
+collected 26 items
+
+tests/test_add_post.py .......                                           [ 26%]
+tests/test_graph_api.py ......                                           [ 50%]
+tests/test_run_due.py .......                                            [ 76%]
+tests/test_validation.py ......                                          [100%]
+
+============================== 26 passed in 0.05s ==============================

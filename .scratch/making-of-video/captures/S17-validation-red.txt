@@ -1,0 +1,39 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.16, pytest-9.2.0, pluggy-1.7.0
+rootdir: /Users/newtypeman/claudeProjects/insta
+configfile: pyproject.toml
+collected 4 items
+
+tests/test_add_post.py ..FF                                              [100%]
+
+=================================== FAILURES ===================================
+____ test_schedule_without_timezone_is_refused_before_it_reaches_the_queue _____
+
+tmp_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-29/test_schedule_without_timezone0')
+
+    def test_schedule_without_timezone_is_refused_before_it_reaches_the_queue(tmp_path):
+        queue = tmp_path / "queue.json"
+        write_queue(queue, [FIRST])
+    
+>       with pytest.raises(AddError, match="시간대가 없음"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE AddError
+
+tests/test_add_post.py:67: Failed
+_________________ test_caption_over_2200_characters_is_refused _________________
+
+tmp_path = PosixPath('/private/var/folders/qg/9gmh247s7ps21klz_92yhj040000gn/T/pytest-of-newtypeman/pytest-29/test_caption_over_2200_charact0')
+
+    def test_caption_over_2200_characters_is_refused(tmp_path):
+        queue = tmp_path / "queue.json"
+        write_queue(queue, [FIRST])
+    
+>       with pytest.raises(AddError, match="2200자를 넘음"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE AddError
+
+tests/test_add_post.py:78: Failed
+=========================== short test summary info ============================
+FAILED tests/test_add_post.py::test_schedule_without_timezone_is_refused_before_it_reaches_the_queue
+FAILED tests/test_add_post.py::test_caption_over_2200_characters_is_refused
+========================= 2 failed, 2 passed in 0.04s ==========================
