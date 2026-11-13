@@ -170,3 +170,21 @@
   > 자막: 조용히 실패하지 않게
 - 증거: captures/S16-auth-error-red.txt, captures/S16-auth-error-cli.txt, captures/S16-actions-first-run.txt (GitHub에서 첫 실행 성공, 예약된 글이 없어 "큐 변경 없음")
 - 영상 가치: ★★
+
+### S17. 사진 주소 하나로 글 추가하기
+- 목표: `queue.json`을 손으로 고치지 않고, 공개된 JPEG 주소 하나로 글을 큐에 넣는다
+- 시도: 처음엔 "아무 사진이나 주면 JPEG로 바꿔서 올린다"를 생각했다. 그런데 변환은 몇 줄이지만, 바꾼 파일을 다시 공개 주소에 올려야 인스타그램이 가져간다(저장소 커밋 + 공개 저장소 조건). 배보다 배꼽이 커서 JPEG만 받기로 정했다. 웹 화면도 서버·저장 공간·로그인이 필요해서 빼고, 명령 한 줄 `uv run autopost add <URL> --caption … --at …`로 정했다. TDD로 한 조각씩: 들어가는 경우 → PNG 거절 → 기존 검증 재사용 → 열리지 않는 주소 → id
+- 결과: 테스트 29개 통과. 진짜 주소로 돌려 보니 JPEG는 들어가고, PNG는 `JPEG가 아님 (PNG로 보임)`, 없는 raw 주소는 `HTTP Error 404`와 "공개 주소여야 함", 시간대 없는 시각은 거절. 거절되면 큐는 그대로. 중간에 id 테스트 하나가 우연히 통과했다(글 2개 + 1 = 마침 비어 있던 post-3). 진짜로 겹치는 경우(`post-2` 하나만 있을 때)로 고치니 `post-2`를 또 만드는 버그가 드러났다
+- 고찰: 확장자는 믿을 수 없다. `.jpg`라는 이름 대신 파일 앞 3바이트(`FF D8 FF`)를 본다. 그리고 거절은 Actions까지 가서 하는 것보다 큐에 넣는 순간 하는 게 싸다. 실패를 일찍 겪게 하는 장치를 하나 더 앞으로 당겼다
+  > 자막: 확장자 말고 첫 3바이트를 본다
+- 증거: captures/S17-add-first-red.txt, S17-not-jpeg-red.txt, S17-validation-red.txt, S17-unreachable-red.txt, S17-id-red.txt, S17-cli-red.txt, S17-add-green.txt, S17-cli-green.txt, S17-real-urls.txt
+- 영상 가치: ★★
+
+### S18. README를 검증하다가 막힌 API
+- 목표: 다른 사람이 따라 할 수 있게 README와 설정 안내를 쓰고, 안내한 명령을 실제로 돌려 확인한다
+- 시도: README의 "인스타 계정 ID 찾기" 명령을 진짜 토큰으로 실행 (토큰은 출력하지 않고 결과만 확인)
+- 결과: S13에서 대답하던 같은 조회가 이번엔 `API access blocked.` (OAuthException, code 200, subcode 5258005). Actions 실행은 계속 "성공"이었다. 큐에 예약된 글이 없어서 API를 한 번도 부르지 않았기 때문이다. 원인은 Meta 앱 대시보드에서 확인해야 한다 (code 200은 Meta 문서상 권한 범주, subcode 설명은 찾지 못함)
+- 고찰: 코드는 code 190(토큰)만 "실행을 멈추고 알림"으로 다룬다. code 200 차단은 글 하나의 실패로 처리되니, 예약 글이 조용히 `failed`가 되고 실행은 성공으로 끝난다. S16에서 막은 조용한 실패가 다른 에러 코드로 다시 열려 있었다. 그리고 "Actions 초록불"은 "게시가 된다"는 증거가 아니었다
+  > 자막: 초록불은 아무것도 증명하지 않았다
+- 증거: captures/S18-api-blocked.txt
+- 영상 가치: ★★

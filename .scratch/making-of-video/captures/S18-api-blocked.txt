@@ -1,0 +1,2 @@
+$ curl -s "https://graph.facebook.com/v27.0/me/assigned_instagram_accounts?access_token=$IG_ACCESS_TOKEN"
+{"error": {"message": "API access blocked.", "type": "OAuthException", "code": 200, "error_subcode": 5258005}}
